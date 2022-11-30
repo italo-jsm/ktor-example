@@ -1,13 +1,14 @@
 package com.example.plugins
 
-import com.example.service.MessageServiceImpl
+import com.example.service.MessageService
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
+import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
 
-    val messageService = MessageServiceImpl()
+    val messageService by inject<MessageService>()
     routing {
         get("/") {
             call.respondText("Hello World!")

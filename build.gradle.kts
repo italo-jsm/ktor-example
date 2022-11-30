@@ -19,7 +19,6 @@ application {
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 }
 
 dependencies {
@@ -32,7 +31,6 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("org.postgresql:postgresql:42.3.1")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    implementation ("io.insert-koin:koin-core:3.2.0")
     implementation("io.insert-koin:koin-ktor:$koin_ktor")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_ktor")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
