@@ -1,13 +1,19 @@
 package com.example.database
 
+import io.ktor.server.config.*
 import java.sql.Connection
 import java.sql.DriverManager
 
-fun getConnection(): Connection {
-    val jdbcUrl = "jdbc:postgresql://localhost:5432/postgres"
 
-    val connection = DriverManager
-        .getConnection(jdbcUrl, "postgres", "mysecretpassword")
-    println(connection.isValid(0))
-    return connection
+class DatabaseConnection(private val config: ApplicationConfig){
+    fun getConnection(): Connection {
+        val username = config.propertyOrNull("database.username")?.getString()
+        val password = config.propertyOrNull("database.password")?.getString()
+        val url = config.propertyOrNull("database.url")?.getString()
+
+        val connection = DriverManager
+            .getConnection(url, username, password)
+        println(connection.isValid(0))
+        return connection
+    }
 }

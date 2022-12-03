@@ -1,6 +1,6 @@
 package com.example.config
 
-import com.example.database.getConnection
+import com.example.database.DatabaseConnection
 import com.example.repository.MessageRepository
 import com.example.repository.MessageRepositoryImpl
 import com.example.service.MessageService
@@ -9,8 +9,11 @@ import org.koin.dsl.module
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 
+fun propertiesModule() = module {
+    single { EnvironmentPropertiesLoader.getEnvironmentConf() }
+}
 fun postgresModule() = module {
-    single { getConnection() }
+    single { DatabaseConnection(get()) }
 }
 
 fun messageRepositoryModule() = module {
@@ -26,6 +29,7 @@ fun Application.installDependencyInjection() = install(Koin){
     modules(
         postgresModule(),
         messageRepositoryModule(),
-        messageServiceModule()
+        messageServiceModule(),
+        propertiesModule()
     )
 }

@@ -4,6 +4,7 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val koin_ktor: String by project
+val hopliteVersion: String by project
 
 plugins {
     application
